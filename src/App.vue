@@ -11,7 +11,7 @@ export default {
     let userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
     if (userInfo) {
       this.$store.state.userInfo = userInfo
-      console.log(userInfo)
+      // console.log(userInfo)
     }
   }
 }

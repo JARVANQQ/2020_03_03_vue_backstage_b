@@ -69,10 +69,10 @@ export default {
         if (this.userInfo.token) {
           const userInfo = JSON.stringify(this.userInfo)
           this.$router.push('/home')
-          this.$message({
+          /*this.$message({
             message: '登录成功',
             type: 'success'
-          })
+          })*/
           window.sessionStorage.setItem('userInfo', userInfo)
         }
       })

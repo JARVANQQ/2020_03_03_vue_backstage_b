@@ -6,9 +6,21 @@ import axios from 'axios'
 export default function ajax (url, data={}, type='GET') {
 
   return new Promise(function (resolve, reject) {
+
+    //axios请求拦截器
+    let userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
+    if (userInfo && userInfo.token) {
+      axios.interceptors.request.use(config => {
+        // console.log('token:'+userInfo.token)
+        //为请求头对象，添加token的验证Authorization字段
+        config.headers.Authorization = userInfo.token
+        // console.log('拦截器：'+userInfo.token)
+        return config
+      })
+    }
     // 执行异步ajax请求
     let promise
-    if (type === 'GET') {
+    if (type.toUpperCase() === 'GET') {
       // 准备url query参数数据
       let dataStr = '' //数据拼接字符串
       Object.keys(data).forEach(key => {
@@ -20,9 +32,15 @@ export default function ajax (url, data={}, type='GET') {
       }
       // 发送get请求
       promise = axios.get(url)
-    } else {
+    } else if (type.toUpperCase() === 'PUT') {
+      //发送put请求
+      promise = axios.put(url, data)
+    } else if (type.toUpperCase() === 'POST') {
       // 发送post请求
       promise = axios.post(url, data)
+    } else if (type.toUpperCase() === 'DELETE') {
+      // 发送delete请求
+      promise = axios.delete(url)
     }
     promise.then(function (response) {
       // 成功了调用resolve()
@@ -33,10 +51,3 @@ export default function ajax (url, data={}, type='GET') {
     })
   })
 }
-
-/*
-const response = await ajax()
-const result = response.data
-
-const resule = await ajax()
- */
