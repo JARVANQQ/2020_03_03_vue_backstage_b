@@ -14,23 +14,23 @@
           <el-aside :width="isCollapse?'64px':'200px'" class="aside">
             <div class="toggle_nav_menu" :label="isCollapse" @click="toggleNavMenu">|||</div>
             <el-menu
+              :default-active="activePath"
               router
               unique-opened
               :collapse="isCollapse"
               :collapse-transition="false"
-              :default-active="$route.path"
               background-color="#001529"
               text-color="#fff"
               active-text-color="#409EFF">
               <!--一级菜单-->
-              <el-submenu :index="menus.id+''" v-for="menus in leftMenuPermissions" :key="menus.id">
+              <el-submenu :index="menus.id+''" v-for="menus in leftMenuPermissions" :key="menus.id" >
                 <template slot="title">
                   <i :class="icon[menus.id]" style="margin-right: 5px"></i>
                   <span>{{menus.authName}}</span>
                 </template>
                 <!--二级菜单-->
                 <el-menu-item v-if="menus.children" :index="'/'+menu.path" v-for="(menu) in menus.children"
-                              :key="menu.id">
+                              :key="menu.id" @click="saveNavState('/' + menu.path)">
                   <i class="el-icon-menu"></i>
                   <span>{{menu.authName}}</span>
                 </el-menu-item>
@@ -74,7 +74,9 @@ export default {
         '107':'/orders',
         '146':'/data',
       },*/
-      activeId: ''
+      activeId: '',
+      // 被激活的链接地址
+      activePath: ''
     }
   },
   computed: {
@@ -82,6 +84,8 @@ export default {
   },
   mounted () {
     this.$store.dispatch('getLeftMenuPermissions')
+    this.activePath = window.sessionStorage.getItem('activePath')
+    this.$router.replace( this.activePath)
   },
   methods: {
     loginOut () {
@@ -92,6 +96,11 @@ export default {
     toggleNavMenu () {
       this.isCollapse = !this.isCollapse
     },
+    // 保存链接的激活状态
+    saveNavState(activePath) {
+      window.sessionStorage.setItem('activePath', activePath)
+      this.activePath = activePath
+    }
     /*handleRoute (path) {
       const {routers} = this
       this.$router.push(routers[path])

@@ -10,13 +10,22 @@ import {
   reqToAddUser,
   reqModifyUserInfo,
   reqModifyAfterUserInfo,
-  reqDeleteUserInfo
+  reqDeleteUserInfo,
+  reqRightList,
+  reqRoleList,
+  reqDeleteRoleRight,
+  reqRoleRights,
+  reqAssignUserRole
 } from '../api'
 import {
   RECEIVE_USER_INFO,
   RECEIVE_LEFT_MENU_PERMISSIONS,
   RECEIVE_USER_LIST,
-  RECEIVE_MODIFY_USER_INFO
+  RECEIVE_MODIFY_USER_INFO,
+  RECEIVE_RIGHT_LIST,
+  RECEIVE_ROLE_LIST,
+  RECEIVE_ROLE_INFO_CHILDREN,
+  RECEIVE_RIGHT_TREE
 } from './mutation-types'
 
 export default {
@@ -90,6 +99,61 @@ export default {
       messageSuccess('删除成功!')
     }else {
       messageError('删除失败！')
+    }
+  },
+  //异步获取权限列表
+  async getRightList ({commit}, type) {
+    if (type === 'list') {
+      const result =  await reqRightList (type)
+      if (result.meta && result.meta.status === 200) {
+        const rightList = result.data
+        commit (RECEIVE_RIGHT_LIST, {rightList})
+      }
+    }else {
+      const result =  await reqRightList (type)
+      if (result.meta && result.meta.status === 200) {
+        const rightTree = result.data
+        commit (RECEIVE_RIGHT_TREE, {rightTree})
+      }
+    }
+
+  },
+  //异步获取角色列表
+  async getRoleList ({commit}) {
+    const result =  await reqRoleList ()
+    if (result.meta && result.meta.status === 200) {
+      const roleList = result.data
+      commit (RECEIVE_ROLE_LIST, {roleList})
+    }
+  },
+  //异步删除角色指定权限
+  async deleteRoleRight ({commit}, deleteId) {
+    const result =  await reqDeleteRoleRight (deleteId)
+    if (result.meta && result.meta.status === 200) {
+      messageSuccess(result.meta.msg)
+      const roleInfoChildren = result.data
+      commit (RECEIVE_ROLE_INFO_CHILDREN, {roleInfoChildren})
+    }else {
+      messageError('删除失败！')
+    }
+  },
+  //异步给指定的角色授权
+  async roleRights ({commit, state}, needRoleRightKeys) {
+    const result =  await reqRoleRights (needRoleRightKeys)
+    if (result.meta && result.meta.status === 200) {
+      state.assignRoleRightsStatus = 2//更改state中assignRoleRightsStatus的状态，并且下一步调用getRoleList重新加载页面
+      messageSuccess('分配权限成功')
+    }else {
+      messageError('分配权限失败')
+    }
+  },
+  //异步分配用户角色
+  async assignUserRole ({commit}, idInfo) {
+    const result =  await reqAssignUserRole (idInfo)
+    if (result.meta && result.meta.status === 200) {
+      messageSuccess(result.meta.msg)
+    }else {
+      messageError('分配角色失败')
     }
   },
 }

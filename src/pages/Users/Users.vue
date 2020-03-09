@@ -1,11 +1,6 @@
 <template>
   <div id="user_container">
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-      <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-      <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-    </el-breadcrumb>
+    <BreadCrumb :menuName="menuName"></BreadCrumb>
     <el-card class="user_card">
       <div class="search">
         <el-input placeholder="请输入内容" v-model="userListParam.query" class="input-with-select">
@@ -33,7 +28,7 @@
             <el-button type="danger" icon="el-icon-delete" @click="deleteUserInfo(scope.row.id)"></el-button>
             <!--分配角色按钮-->
             <el-tooltip class="item" effect="dark" content="分配角色" placement="top" :enterable="false">
-              <el-button type="warning" icon="el-icon-setting"></el-button>
+              <el-button type="warning" icon="el-icon-setting" @click="assignRole(scope.row)"></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -51,17 +46,22 @@
       </div>
     </el-card>
     <!--弹窗信息-->
-    <Dialog :updateUserList="_getUserList" />
+    <userDialog :updateUserList="_getUserList" :currentUserInfo="currentUserInfo"/>
   </div>
 </template>
 
 <script>
   import {mapState} from 'vuex'
 
-  import Dialog from '../../components/Dialog/Dialog'
+  import userDialog from '../../components/userDialog/userDialog'
+  import BreadCrumb from '../../components/BreadCrumb/BreadCrumb'
   export default {
     data () {
       return {
+        menuName: {
+          oneName: '用户管理',
+          twoName: '用户列表'
+        },
         userListParam: {
           query: '',
           pagenum: 1,
@@ -70,7 +70,8 @@
         tableData: [],
         total: 0,
         dialogVisible: false,
-        currentPage: 1
+        currentPage: 1,
+        currentUserInfo: {},//当前点击scope.row的信息
       }
     },
     mounted () {
@@ -129,8 +130,15 @@
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });
-        });
+          })
+        })
+      },
+      //分配角色
+      assignRole (currentUserInfo) {
+        //获取角色列表
+        this.$store.dispatch('getRoleList')
+        this.$store.state.assignRoleVisible = true
+        this.currentUserInfo = currentUserInfo
       }
     },
     watch: {
@@ -140,7 +148,8 @@
       }
     },
     components: {
-      Dialog
+      userDialog,
+      BreadCrumb
     }
   }
 
@@ -148,10 +157,6 @@
 
 <style lang="less" scoped>
   #user_container {
-    .el-breadcrumb {
-      margin-bottom: 15px;
-      font-size: 12px;
-    }
     .user_card {
       box-shadow: 0 2px 1px rgba(0, 0, 0, .1);
       .search {

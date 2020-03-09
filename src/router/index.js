@@ -20,47 +20,58 @@ const router = new Router({
   routes: [
     {
       path: '/login',
+      name: 'login',
       component: Login
     },
     {
       path: '/admin',
+      name: 'admin',
       component: Admin,
       redirect: '/home',
       children: [
         {
           path: '/home',
+          name: 'home',
           component: Home
         },
         {
           path: '/users',
+          name: 'users',
           component: Users
         },
         {
           path: '/roles',
+          name: 'roles',
           component: Roles
         },
         {
           path: '/rights',
+          name: 'rights',
           component: Rights
         },
         {
           path: '/goods',
+          name: 'goods',
           component: Goods
         },
         {
           path: '/params',
+          name: 'params',
           component: Params
         },
         {
           path: '/categories',
+          name: 'categories',
           component: Categories
         },
         {
           path: '/orders',
+          name: 'orders',
           component: Orders
         },
         {
           path: '/reports',
+          name: 'reports',
           component: Reports
         }
       ]

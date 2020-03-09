@@ -9,7 +9,7 @@ import './assets/css/global.css'
 
 import {Button, Form, FormItem, Icon, Input, Message, Container, Header,
   Aside, Main, Footer, Menu, Submenu, MenuItem, MenuItemGroup, Breadcrumb, BreadcrumbItem, Card,
-  Table, TableColumn, Pagination, Switch, Tooltip, Dialog, MessageBox
+  Table, TableColumn, Pagination, Switch, Tooltip, Dialog, MessageBox, Tag, Row, Col, Tree, Select, Option
 } from 'element-ui'
 
 Vue.use(Button)
@@ -36,6 +36,12 @@ Vue.use(Pagination)
 Vue.use(Switch)
 Vue.use(Tooltip)
 Vue.use(Dialog)
+Vue.use(Tag)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Tree)
+Vue.use(Select)
+Vue.use(Option)
 Vue.prototype.$confirm = MessageBox.confirm;
 Vue.config.productionTip = false
 

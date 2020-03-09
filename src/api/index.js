@@ -21,3 +21,13 @@ export const reqModifyUserInfo = (id) => ajax(BASE_URL+`/users/${id}`)
 export const reqModifyAfterUserInfo = ({id, email, mobile}) => ajax(BASE_URL+`/users/${id}`,{email, mobile}, 'PUT')
 //删除用户信息
 export const reqDeleteUserInfo = (id) => ajax(BASE_URL+`/users/${id}`,{}, 'DELETE')
+//所有权限列表
+export const reqRightList = (type) => ajax(BASE_URL+`/rights/${type}`)
+//获取角色列表
+export const reqRoleList = () => ajax(BASE_URL+'/roles')
+//1.5.7. 删除角色指定权限
+export const reqDeleteRoleRight = ({roleId, rightId}) => ajax(BASE_URL+`/roles/${roleId}/rights/${rightId}`,{}, 'DELETE')
+//1.5.6. 角色授权
+export const reqRoleRights = ({roleId, rids}) => ajax(BASE_URL+`/roles/${roleId}/rights`, {rids}, 'POST')
+//1.3.7. 分配用户角色
+export const reqAssignUserRole = ({id, rid}) => ajax(BASE_URL+`/users/${id}/role`, {rid}, 'PUT')
