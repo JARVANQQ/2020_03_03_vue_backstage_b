@@ -13,4 +13,9 @@ export default {
   rightTree: [],//tree权限列表
   assignRoleRightsStatus: 0,//记录分配权限的状态，0代表未重新分配权限，2代表已经重新分配权限并且数据成功提交给后台服务器
   assignRoleVisible: false,//分配角色的弹窗状态
+  goodsCate: [], //商品分类数据列表
+  goodsCateTotal: 0,//商品分类数据列表的总条数，与goodsCate数据一同获得
+  addGoodsCateVisible:false,//想要添加的商品分类弹窗状态
+  parentGoodsCate: [],//打开添加分类弹窗后的1级和2数据
+
 }

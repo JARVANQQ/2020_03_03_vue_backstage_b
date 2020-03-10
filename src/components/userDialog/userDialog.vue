@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="add_user_container" v-if="$store.state.addUserVisible">
-      <el-dialog title="添加用户" :visible.sync="$store.state.addUserVisible" width="40%" :lock-scroll="false" :before-close="handleClose" >
+      <el-dialog title="添加用户" :visible.sync="$store.state.addUserVisible" width="40%" :lock-scroll="false">
         <el-form ref="addUseRef" :model="addUserForm" label-width="70px" :rules="addUserRules">
           <el-form-item label="用户名" prop="username">
             <el-input v-model="addUserForm.username"></el-input>
@@ -128,18 +128,10 @@ export default {
     //     console.log(this.currentUserInfo)
     // },
     methods: {
-      handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-           this.NoToAddUser ()
-          })
-          .catch(erro => {
-
-          })
-      },
       //取消添加用户
       NoToAddUser () {
         this.$store.state.addUserVisible = false
+        //重置
         this.$refs.addUseRef.resetFields()
       },
       //确认添加用户

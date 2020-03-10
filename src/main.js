@@ -9,9 +9,12 @@ import './assets/css/global.css'
 
 import {Button, Form, FormItem, Icon, Input, Message, Container, Header,
   Aside, Main, Footer, Menu, Submenu, MenuItem, MenuItemGroup, Breadcrumb, BreadcrumbItem, Card,
-  Table, TableColumn, Pagination, Switch, Tooltip, Dialog, MessageBox, Tag, Row, Col, Tree, Select, Option
+  Table, TableColumn, Pagination, Switch, Tooltip, Dialog, MessageBox, Tag, Row, Col, Tree, Select, Option,
+  Cascader
 } from 'element-ui'
+import TreeTable from 'vue-table-with-tree-grid'
 
+Vue.component('tree-table', TreeTable)
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
@@ -42,6 +45,7 @@ Vue.use(Col)
 Vue.use(Tree)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Cascader)
 Vue.prototype.$confirm = MessageBox.confirm;
 Vue.config.productionTip = false
 

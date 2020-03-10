@@ -6,7 +6,6 @@ import axios from 'axios'
 export default function ajax (url, data={}, type='GET') {
 
   return new Promise(function (resolve, reject) {
-
     //axios请求拦截器
     let userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
     if (userInfo && userInfo.token) {
@@ -36,6 +35,7 @@ export default function ajax (url, data={}, type='GET') {
       //发送put请求
       promise = axios.put(url, data)
     } else if (type.toUpperCase() === 'POST') {
+      console.log(data)
       // 发送post请求
       promise = axios.post(url, data)
     } else if (type.toUpperCase() === 'DELETE') {

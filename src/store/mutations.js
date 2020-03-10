@@ -9,7 +9,9 @@ import {
   RECEIVE_RIGHT_LIST,
   RECEIVE_ROLE_LIST,
   RECEIVE_ROLE_INFO_CHILDREN,
-  RECEIVE_RIGHT_TREE
+  RECEIVE_RIGHT_TREE,
+  RECEIVE_GOODS_CATE,
+  RECEIVE_PARENT_GOODS_CATE
 } from './mutation-types'
 
 export default {
@@ -36,5 +38,12 @@ export default {
   },
   [RECEIVE_RIGHT_TREE] (state, {rightTree}) {
     state.rightTree = rightTree
+  },
+  [RECEIVE_GOODS_CATE] (state, {goodsCate, goodsCateTotal}) {
+    state.goodsCate = goodsCate
+    state.goodsCateTotal = goodsCateTotal
+  },
+  [RECEIVE_PARENT_GOODS_CATE] (state, {parentGoodsCate}) {
+    state.parentGoodsCate = parentGoodsCate
   },
 }

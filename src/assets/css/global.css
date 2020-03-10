@@ -6,3 +6,6 @@ body{
   width: 100%;
   height: 100%;
 }
+.el-cascader-panel{
+  height: 200px;
+}

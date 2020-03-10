@@ -33,17 +33,15 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="block">
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page.sync="currentPage"
-          :page-sizes="[2, 4, 8]"
-          :page-size="userListParam.pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total">
-        </el-pagination>
-      </div>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage"
+        :page-sizes="[2, 4, 8]"
+        :page-size="userListParam.pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
     </el-card>
     <!--弹窗信息-->
     <userDialog :updateUserList="_getUserList" :currentUserInfo="currentUserInfo"/>
@@ -122,10 +120,13 @@
         this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
+          lockScroll: false,
           type: 'warning'
         }).then(() => {
           this.$store.dispatch('deleteUserInfo', id)
-          this._getUserList()
+          setTimeout(() => {
+            this._getUserList()
+          },100)
         }).catch(() => {
           this.$message({
             type: 'info',

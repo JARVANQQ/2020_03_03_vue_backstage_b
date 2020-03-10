@@ -9,3 +9,5 @@ export const RECEIVE_RIGHT_LIST = 'receive_right_list'//接收list权限列表
 export const RECEIVE_ROLE_LIST = 'receive_role_list'//接收角色列表
 export const RECEIVE_ROLE_INFO_CHILDREN = 'receive_role_info_children'//删除权限后返回的新的角色权限
 export const RECEIVE_RIGHT_TREE = 'receive_right_tree'//接收tree权限列表
+export const RECEIVE_GOODS_CATE = 'receive_goods_cate'//接收商品分类数据列表
+export const RECEIVE_PARENT_GOODS_CATE = 'receive_parent_goods_cate'//接收打开添加分类弹窗后的1级和2数据
