@@ -38,3 +38,5 @@ export const reqParentGoodsCate = (type) => ajax(BASE_URL+'/categories', {type},
 export const reqAddGoodCate = ({cat_pid, cat_name, cat_level}) => ajax(BASE_URL+'/categories', {cat_pid, cat_name, cat_level}, 'POST')
 //1.6.5. 删除分类
 export const reqDeleteGoodsCate = (id) => ajax(BASE_URL+`/categories/${id}`,{}, 'DELETE')
+//1.7.1. 参数列表
+export const reqParamsList = ({id, sel}) => ajax(BASE_URL+`/categories/${id}/attributes`, {id, sel}, 'GET')

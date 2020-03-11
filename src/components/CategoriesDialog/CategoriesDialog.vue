@@ -16,7 +16,7 @@
             clearable
             v-model="addGoodsCatekeys"
             :options="parentGoodsCate"
-            :props="{expandTrigger: 'hover', checkStrictly: true, value: 'cat_id', label: 'cat_name', children: 'children', clearable: true}"
+            :props="{expandTrigger: 'hover', checkStrictly: true, value: 'cat_id', label: 'cat_name', children: 'children'}"
             @change="handleChange">
           </el-cascader>
         </el-form-item>

@@ -11,7 +11,8 @@ import {
   RECEIVE_ROLE_INFO_CHILDREN,
   RECEIVE_RIGHT_TREE,
   RECEIVE_GOODS_CATE,
-  RECEIVE_PARENT_GOODS_CATE
+  RECEIVE_PARENT_GOODS_CATE,
+  RECEIVE_PARAMS_LIST
 } from './mutation-types'
 
 export default {
@@ -45,5 +46,8 @@ export default {
   },
   [RECEIVE_PARENT_GOODS_CATE] (state, {parentGoodsCate}) {
     state.parentGoodsCate = parentGoodsCate
+  },
+  [RECEIVE_PARAMS_LIST] (state, {paramsList}) {
+    state.paramsList = paramsList
   },
 }

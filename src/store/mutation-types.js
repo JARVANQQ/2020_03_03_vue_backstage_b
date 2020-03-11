@@ -11,3 +11,4 @@ export const RECEIVE_ROLE_INFO_CHILDREN = 'receive_role_info_children'//删除�
 export const RECEIVE_RIGHT_TREE = 'receive_right_tree'//接收tree权限列表
 export const RECEIVE_GOODS_CATE = 'receive_goods_cate'//接收商品分类数据列表
 export const RECEIVE_PARENT_GOODS_CATE = 'receive_parent_goods_cate'//接收打开添加分类弹窗后的1级和2数据
+export const RECEIVE_PARAMS_LIST = 'receive_params_list'//接收参数列表

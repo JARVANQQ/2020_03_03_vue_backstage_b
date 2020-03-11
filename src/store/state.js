@@ -16,6 +16,7 @@ export default {
   goodsCate: [], //商品分类数据列表
   goodsCateTotal: 0,//商品分类数据列表的总条数，与goodsCate数据一同获得
   addGoodsCateVisible:false,//想要添加的商品分类弹窗状态
-  parentGoodsCate: [],//打开添加分类弹窗后的1级和2数据
+  parentGoodsCate: [],//打开添加分类弹窗后的1级和2数据,或者type=3时，在params页面获取3级数据
+  paramsList: [], // 分类参数列表
 
 }

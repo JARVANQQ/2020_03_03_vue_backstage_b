@@ -19,7 +19,8 @@ import {
   reqGoodsCate,
   reqParentGoodsCate,
   reqAddGoodCate,
-  reqDeleteGoodsCate
+  reqDeleteGoodsCate,
+  reqParamsList
 } from '../api'
 import {
   RECEIVE_USER_INFO,
@@ -31,7 +32,8 @@ import {
   RECEIVE_ROLE_INFO_CHILDREN,
   RECEIVE_RIGHT_TREE,
   RECEIVE_GOODS_CATE,
-  RECEIVE_PARENT_GOODS_CATE
+  RECEIVE_PARENT_GOODS_CATE,
+  RECEIVE_PARAMS_LIST
 } from './mutation-types'
 
 export default {
@@ -199,6 +201,14 @@ export default {
       messageSuccess('删除成功')
     } else {
       messageError('删除失败')
+    }
+  },
+  //异步获取参数列表
+  async getParamsList ({commit}, paramsInfo) {
+    const result = await reqParamsList(paramsInfo)
+    if (result.meta && result.meta.status === 200) {
+      const paramsList = result.data
+      commit(RECEIVE_PARAMS_LIST, {paramsList})
     }
   },
 }
