@@ -2,7 +2,10 @@
 ajax请求函数模块
 返回值: promise对象(异步返回的数据是: response.data)
  */
-import axios from 'axios'
+// import axios from 'axios'
+// import NProgress from 'nprogress'
+// import 'nprogress/nprogress.css' 项目优化
+
 export default function ajax (url, data={}, type='GET') {
 
   return new Promise(function (resolve, reject) {
@@ -10,10 +13,18 @@ export default function ajax (url, data={}, type='GET') {
     let userInfo = JSON.parse(window.sessionStorage.getItem('userInfo'))
     if (userInfo && userInfo.token) {
       axios.interceptors.request.use(config => {
+        //头部进度条开启
+        NProgress.start()
         // console.log('token:'+userInfo.token)
         //为请求头对象，添加token的验证Authorization字段
         config.headers.Authorization = userInfo.token
         // console.log('拦截器：'+userInfo.token)
+        return config
+      })
+      //axios响应拦截器
+      axios.interceptors.response.use(config => {
+        //头部进度条关闭
+        NProgress.done()
         return config
       })
     }
@@ -35,7 +46,6 @@ export default function ajax (url, data={}, type='GET') {
       //发送put请求
       promise = axios.put(url, data)
     } else if (type.toUpperCase() === 'POST') {
-      console.log(data)
       // 发送post请求
       promise = axios.post(url, data)
     } else if (type.toUpperCase() === 'DELETE') {

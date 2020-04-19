@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+// import Vue from 'vue'
+// import Router from 'vue-router'
 import store from '../store'
 
 import Login from '../pages/Login/Login'
@@ -14,9 +14,12 @@ import Categories from '../pages/Categories/Categories'
 import Orders from '../pages/Orders/Orders'
 import Reports from '../pages/Reports/Reports'
 
-Vue.use(Router)
 
-const router = new Router({
+// Vue.use(Router) 项目优化前
+/* global Vue 项目优化后*/
+Vue.use(VueRouter)
+
+const router = new VueRouter({//项目优化后要加vue
   routes: [
     {
       path: '/login',

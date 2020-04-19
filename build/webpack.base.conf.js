@@ -24,6 +24,14 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  //项目优化，引入外部的CDN资源
+  externals: {
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'axios': 'axios',
+    'nprogress': 'nprogress',
+    'element-ui': 'ELEMENT',
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

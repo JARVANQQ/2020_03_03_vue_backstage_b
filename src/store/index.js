@@ -1,7 +1,7 @@
 /*
 *Vuex的核心管理对象store
 */
-import Vue from 'vue'
+// import Vue from 'vue'
 import vuex from 'vuex'
 import state from './state'
 import getters from './getters'
