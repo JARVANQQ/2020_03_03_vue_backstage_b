@@ -78,7 +78,7 @@ const router = new Router({
     },
     {
       path: '/',
-      redirect: '/login'//重定向到login,输入'/'也会跳转到'/login'
+      redirect: '/login'//重定向到login,输入'/'也会跳转到'/login'2021.5.29
     },
 
   ]
