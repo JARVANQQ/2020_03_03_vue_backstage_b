@@ -17,6 +17,7 @@ import Reports from '../pages/Reports/Reports'
 Vue.use(Router)
 
 const router = new Router({
+	//123456789
   routes: [
     {
       path: '/login',
